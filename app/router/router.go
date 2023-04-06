@@ -2,7 +2,6 @@ package config
 
 import (
 	"go-gin-init-v2/app/handler"
-	"go-gin-init-v2/app/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,9 +14,10 @@ func SetupRouter(
 ) *gin.Engine {
 	r := gin.Default()
 
-	authMiddleware := middleware.NewFirebaseAuth(newMockFirebaseAuthClient())
+	// middleware周りの実装
+	// authMiddleware := middleware.NewFirebaseAuth(newMockFirebaseAuthClient())
 	// authMiddleware := middleware.NewFirebaseAuth(firebaseAuthClient())
-	r.Use(authMiddleware.Authentication)
+	// r.Use(authMiddleware.Authentication)
 
 	// NewHandler
 	defo := defaultHandler

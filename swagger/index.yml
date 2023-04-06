@@ -9,8 +9,6 @@ servers:
 paths:
   /todos:
     get:
-      tags:
-        - user
       summary: todo一覧を表示する
       description: ここはAPIの詳細を書きます
       operationId: V1GetTodoAll
@@ -27,9 +25,9 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
-    post:
       tags:
-        - user
+        - todo
+    post:
       summary: todoを新規作成する
       description: ここはAPIの詳細を書きます
       operationId: V1CreateTodo
@@ -61,11 +59,11 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      tags:
+        - todo
     parameters: []
   '/todos/{id}':
     get:
-      tags:
-        - user
       summary: idで特定のtodoを返します
       description: ここはAPIの詳細を書きます
       operationId: v1GetTodoById
@@ -90,9 +88,9 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
-    put:
       tags:
-        - user
+        - todo
+    put:
       summary: todoの更新
       description: ここはAPIの詳細を書きます
       operationId: V1UpdateTodo
@@ -125,9 +123,9 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
-    delete:
       tags:
-        - user
+        - todo
+    delete:
       summary: todoの削除
       description: ここはAPIの詳細を書きます
       operationId: v1DeleteTodo
@@ -145,6 +143,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
+      tags:
+        - todo
     parameters:
       - schema:
           type: string
