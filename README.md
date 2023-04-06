@@ -35,7 +35,7 @@ gin + gorm + mysql のディレクトリをざっくり作るよ
 └── terraform
 ```
 
-# app_name
+# go-gin-init-v2
 
 ## Getting Started（開始方法）
 
@@ -81,7 +81,7 @@ brew install --cask stoplight-studio
 
 ## cloud run でのデプロイ
 
-1. コンソール画面から新規プロジェクト`app_name`を作成
+1. コンソール画面から新規プロジェクト`go-gin-init-v2`を作成
    https://console.cloud.google.com/projectselector2/home/dashboard
 
 2. cloud run api を有効化

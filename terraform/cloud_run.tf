@@ -9,11 +9,11 @@ resource "google_cloud_run_service" "default" {
         image = "asia.gcr.io/${var.project}/${var.server}/${var.buket}:latest"
         env {
           name  = "DB_USER"
-          value = google_sql_user.app_name-user.name
+          value = google_sql_user.go-gin-init-v2-user.name
         }
         env {
           name  = "DB_PASS"
-          value = google_sql_user.app_name-user.password
+          value = google_sql_user.go-gin-init-v2-user.password
         }
         env {
           name  = "INSTANCE_CONNECTION_NAME"
@@ -25,7 +25,7 @@ resource "google_cloud_run_service" "default" {
         }
         env {
           name  = "DB_NAME"
-          value = google_sql_database.app_name-db.name
+          value = google_sql_database.go-gin-init-v2-db.name
         }
         env {
           name  = "ENV"
@@ -36,7 +36,7 @@ resource "google_cloud_run_service" "default" {
   }
   metadata {
     annotations = {
-      "run.googleapis.com/cloudsql-instances" = google_sql_database_instance.app_name-db.connection_name
+      "run.googleapis.com/cloudsql-instances" = google_sql_database_instance.go-gin-init-v2-db.connection_name
     }
   }
   autogenerate_revision_name = true

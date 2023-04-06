@@ -1,11 +1,11 @@
 package handlers
 
 import (
-	"app_name/app/config"
-	"app_name/app/handler"
-	"app_name/app/repository"
-	"app_name/app/service"
-	"app_name/app/test"
+	"go-gin-init-v2/app/config"
+	"go-gin-init-v2/app/handler"
+	"go-gin-init-v2/app/repository"
+	"go-gin-init-v2/app/service"
+	"go-gin-init-v2/app/test"
 	"fmt"
 	"net/http"
 	"net/http/httptest"

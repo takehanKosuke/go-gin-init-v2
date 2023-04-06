@@ -1,8 +1,8 @@
 package config
 
 import (
-	"app_name/app/handler"
-	"app_name/app/middleware"
+	"go-gin-init-v2/app/handler"
+	"go-gin-init-v2/app/middleware"
 
 	"github.com/gin-gonic/gin"
 )

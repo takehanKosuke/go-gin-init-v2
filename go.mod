@@ -1,4 +1,4 @@
-module app_name
+module go-gin-init-v2
 
 go 1.16
 

@@ -4,17 +4,17 @@ variable "region" {
 
 variable "project" {
   # ここの変数名をプロジェクトのidに変更してください
-  default = "app_name"
+  default = "go-gin-init-v2"
 }
 
 variable "server" {
-  default = "app_name-server"
+  default = "go-gin-init-v2-server"
 }
 
 variable "db" {
-  default = "app_name-db"
+  default = "go-gin-init-v2-db"
 }
 
 variable "bucket" {
-  default = "app_name-bucket"
+  default = "go-gin-init-v2-bucket"
 }

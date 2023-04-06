@@ -1,7 +1,7 @@
 package main
 
 import (
-	"app_name/app/config"
+	"go-gin-init-v2/app/config"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"

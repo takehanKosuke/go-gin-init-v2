@@ -3,10 +3,10 @@
 package main
 
 import (
-	"app_name/app/config"
-	"app_name/app/handler"
-	"app_name/app/repository"
-	"app_name/app/service"
+	"go-gin-init-v2/app/config"
+	"go-gin-init-v2/app/handler"
+	"go-gin-init-v2/app/repository"
+	"go-gin-init-v2/app/service"
 
 	"github.com/google/wire"
 )
@@ -19,13 +19,13 @@ func InitializeApplication() (APIApplication, error) {
 		config.ConnectDB,
 
 		// handler
-		handler.NewDefault,
+		handler.NewTodo,
 
 		// service
-		service.NewDefault,
+		service.NewTodo,
 
 		// repository
-		repository.NewDefault,
+		repository.NewTodo,
 	)
 	return APIApplication{}, nil
 }

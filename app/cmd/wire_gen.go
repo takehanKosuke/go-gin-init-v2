@@ -6,10 +6,10 @@
 package main
 
 import (
-	"app_name/app/config"
-	"app_name/app/handler"
-	"app_name/app/repository"
-	"app_name/app/service"
+	"go-gin-init-v2/app/config"
+	"go-gin-init-v2/app/handler"
+	"go-gin-init-v2/app/repository"
+	"go-gin-init-v2/app/service"
 )
 
 // Injectors from wire.go:

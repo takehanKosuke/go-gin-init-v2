@@ -5,16 +5,16 @@ import (
 	"gorm.io/gorm"
 )
 
-type Default interface {
+type Template interface {
 	Ping()
 }
 
-type DefaultImpl struct {
+type TemplateImpl struct {
 	db *gorm.DB
 }
 
-func NewDefault(db *gorm.DB) Default {
-	return &DefaultImpl{db: db}
+func NewTemplate(db *gorm.DB) Template {
+	return &TemplateImpl{db: db}
 }
 
-func (d *DefaultImpl) Ping() {}
+func (d *TemplateImpl) Ping() {}

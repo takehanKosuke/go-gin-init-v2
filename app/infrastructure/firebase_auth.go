@@ -2,7 +2,7 @@
 package middleware
 
 import (
-	"app_name/app/response"
+	"go-gin-init-v2/app/response"
 	"context"
 
 	"firebase.google.com/go/auth"

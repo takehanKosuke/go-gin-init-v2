@@ -1,6 +1,6 @@
 package test
 
-import "app_name/app/config"
+import "go-gin-init-v2/app/config"
 
 // LoadConfig
 func LoadConfig() *config.Config {
