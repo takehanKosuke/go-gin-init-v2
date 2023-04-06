@@ -68,5 +68,5 @@ dart-cliant-generate:
 		-g dart \
 		-o /local/out/dart
 
-create-template
+create-template:
 	./scripts/create_new_template.sh
