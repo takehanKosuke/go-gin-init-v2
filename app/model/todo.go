@@ -22,7 +22,15 @@ func NewTodo (id int, status Status, text string) *Todo {
 	}
 }
 
-func (m *Todo) ChangeStatus(Status)  {
-	return
+func (m *Todo) Status() Status {
+	return m.status;
+}
+
+func (m *Todo) Text() string {
+	return m.text;
+}
+
+func (m *Todo) ChangeStatus(status Status)  {
+	m.status = status;
 }
 

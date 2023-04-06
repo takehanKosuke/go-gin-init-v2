@@ -2,13 +2,18 @@ package handler
 
 import (
 	"go-gin-init-v2/app/service"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
 // Todo Interface
 type Todo interface {
-	Ping(c *gin.Context)
+	GetAll(c *gin.Context)
+	GetById(c *gin.Context)
+	Post(c *gin.Context)
+	Update(c *gin.Context)
+	Delete(c *gin.Context)
 }
 
 // TodoImpl TodoImpl struct
@@ -23,9 +28,33 @@ func NewTodo(service service.Todo) Todo {
 	}
 }
 
-// Ping 初期デフォルトエンドポイント
-func (d *TodoImpl) Ping(c *gin.Context) {
-	c.JSON(200, gin.H{
+// GetAll 初期デフォルトエンドポイント
+func (d *TodoImpl) GetAll(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"message": "pong",
+	})
+}
+// GetById 初期デフォルトエンドポイント
+func (d *TodoImpl) GetById(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"message": "pong",
+	})
+}
+// Post 初期デフォルトエンドポイント
+func (d *TodoImpl) Post(c *gin.Context) {
+	c.JSON(http.StatusCreated, gin.H{
+		"message": "pong",
+	})
+}
+// Update 初期デフォルトエンドポイント
+func (d *TodoImpl) Update(c *gin.Context) {
+	c.JSON(http.StatusCreated, gin.H{
+		"message": "pong",
+	})
+}
+// Delete 初期デフォルトエンドポイント
+func (d *TodoImpl) Delete(c *gin.Context) {
+	c.JSON(http.StatusNoContent, gin.H{
 		"message": "pong",
 	})
 }
