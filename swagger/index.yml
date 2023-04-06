@@ -7,13 +7,13 @@ servers:
   - url: 'http://localhost:8080/'
     description: ローカルサーバ
 paths:
-  /users:
+  /todos:
     get:
       tags:
         - user
-      summary: user一覧を表示する
+      summary: todo一覧を表示する
       description: ここはAPIの詳細を書きます
-      operationId: getUserAll
+      operationId: V1GetTodoAll
       responses:
         '200':
           description: ok
@@ -22,7 +22,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
+                  $ref: '#/components/schemas/Todo'
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
@@ -30,47 +30,45 @@ paths:
     post:
       tags:
         - user
-      summary: userを新規作成する
+      summary: todoを新規作成する
       description: ここはAPIの詳細を書きます
-      operationId: createUser
+      operationId: V1CreateTodo
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                name:
+                text:
                   type: string
-                email:
-                  type: string
-                  format: email
-                rating:
-                  type: number
-                  format: float
-                is_accept:
-                  type: boolean
+                status:
+                  type: integer
+                  enum:
+                    - yet
+                    - doing
+                    - done
               required:
-                - name
-                - email
+                - text
+        description: ''
       responses:
         '200':
-          description: 特定のuserを返します
+          description: 特定のtodoを返します
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/Todo'
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
     parameters: []
-  /users/{id}:
+  '/todos/{id}':
     get:
       tags:
         - user
-      summary: idで特定のuserを返します
+      summary: idで特定のtodoを返します
       description: ここはAPIの詳細を書きます
-      operationId: getUserByName
+      operationId: v1GetTodoById
       parameters:
         - name: id
           in: path
@@ -80,11 +78,14 @@ paths:
             type: string
       responses:
         '200':
-          description: 特定のuserを返します
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                type: object
+                properties:
+                  '':
+                    $ref: '#/components/schemas/Todo'
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
@@ -92,9 +93,9 @@ paths:
     put:
       tags:
         - user
-      summary: userの更新
+      summary: todoの更新
       description: ここはAPIの詳細を書きます
-      operationId: updateUser
+      operationId: V1UpdateTodo
       parameters:
         - name: id
           in: path
@@ -108,17 +109,18 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                status:
+                  type: integer
+                  enum:
+                    - yet
+                    - doing
+                    - done
+                text:
                   type: string
-                email:
-                  type: string
-                  format: email
-                rating:
-                  type: number
-                  format: float
-                is_accept:
-                  type: boolean
+        description: ''
       responses:
+        '201':
+          description: Created
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
@@ -126,9 +128,9 @@ paths:
     delete:
       tags:
         - user
-      summary: userの削除
+      summary: todoの削除
       description: ここはAPIの詳細を書きます
-      operationId: deleteUser
+      operationId: v1DeleteTodo
       parameters:
         - name: id
           in: path
@@ -137,6 +139,8 @@ paths:
           schema:
             type: string
       responses:
+        '204':
+          description: No Content
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
@@ -162,28 +166,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        email:
-          type: string
-          format: email
-        rating:
-          type: number
-          format: float
-        is_accept:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
     Error:
       type: object
       properties:
@@ -194,3 +176,20 @@ components:
       required:
         - code
         - message
+    Todo:
+      title: Todo
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: integer
+          enum:
+            - yet
+            - doing
+            - done
+        text:
+          type: string
+      required:
+        - id
+        - status
