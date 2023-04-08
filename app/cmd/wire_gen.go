@@ -7,8 +7,9 @@ package main
 
 import (
 	"go-gin-init-v2/app/config"
-	"go-gin-init-v2/app/handler"
-	"go-gin-init-v2/app/repository"
+	"go-gin-init-v2/app/controller"
+	"go-gin-init-v2/app/infrastructure/db"
+	"go-gin-init-v2/app/router"
 	"go-gin-init-v2/app/service"
 )
 
@@ -20,10 +21,10 @@ func InitializeApplication() (APIApplication, error) {
 		return APIApplication{}, err
 	}
 	db := config.ConnectDB(configConfig)
-	repositoryDefault := repository.NewDefault(db)
-	serviceDefault := service.NewDefault(repositoryDefault)
-	handlerDefault := handler.NewDefault(serviceDefault)
-	engine := config.SetupRouter(handlerDefault)
+	todo := infrastructure.NewTodo(db)
+	serviceTodo := service.NewTodo(todo)
+	controllerTodo := controller.NewTodo(serviceTodo)
+	engine := router.SetupRouter(controllerTodo)
 	apiApplication := NewAPIApplication(configConfig, engine, db)
 	return apiApplication, nil
 }

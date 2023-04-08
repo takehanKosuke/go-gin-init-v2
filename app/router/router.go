@@ -1,7 +1,7 @@
-package config
+package router
 
 import (
-	"go-gin-init-v2/app/handler"
+	"go-gin-init-v2/app/controller"
 
 	"github.com/gin-gonic/gin"
 )
@@ -10,7 +10,7 @@ func SetupRouter(
 	// すべてのmiddlewareを記述する
 
 	// すべてのhandlerを記述する
-	defaultHandler handler.Default,
+	todoController controller.Todo,
 ) *gin.Engine {
 	r := gin.Default()
 
@@ -20,10 +20,14 @@ func SetupRouter(
 	// r.Use(authMiddleware.Authentication)
 
 	// NewHandler
-	defo := defaultHandler
+	todo := todoController
 
 	// Routing
-	r.GET("/", defo.Ping)
+	r.GET("/todos", todo.GetAll)
+	r.POST("/todos", todo.Post)
+	r.GET("/todos/:id", todo.GetById)
+	r.DELETE("/todos/:id", todo.Delete)
+	r.PUT("/todos/:id", todo.Update)
 
 	return r
 }

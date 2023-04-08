@@ -1,17 +1,17 @@
 package service
 
-import "go-gin-init-v2/app/repository"
+import infrastructure "go-gin-init-v2/app/infrastructure/db"
 
 type Todo interface {
 	Ping()
 }
 
 type TodoImpl struct {
-	repository repository.Todo
+	infrastructure infrastructure.Todo
 }
 
-func NewTodo(repository repository.Todo) Todo {
-	return &TodoImpl{repository: repository}
+func NewTodo(infrastructure infrastructure.Todo) Todo {
+	return &TodoImpl{infrastructure: infrastructure}
 }
 
 func (d *TodoImpl) Ping() {}

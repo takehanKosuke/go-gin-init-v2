@@ -1,5 +1,5 @@
 //go:generate mockgen -source=$GOFILE -destination=mock_$GOPACKAGE/mock_$GOFILE -package=mock_$GOPACKAGE
-package repository
+package infrastructure
 
 import (
 	"go-gin-init-v2/app/model"

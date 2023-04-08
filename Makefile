@@ -8,7 +8,7 @@ down:
 local:
 	# docker build -t go-gin-init-v2-api ./app
 	# docker run -e MYSQL_HOST=host.docker.internal --rm --name go-gin-init-v2-api_1 -p 8080:8080 go-gin-init-v2-api
-	go run ./app/cmd/*.go
+	go run ./app/cmd/wire_gen.go ./app/cmd/main.go
 
 generate:
 	go generate ./...

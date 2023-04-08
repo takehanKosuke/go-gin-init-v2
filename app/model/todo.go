@@ -16,36 +16,37 @@ type Todo interface {
 	SetText(text string) error
 }
 
+type Id int
 
-type TodoImpl struct {
-	id *int
+type todoImpl struct {
+	id Id
 	status Status
 	text string
 }
 
-func NewTodo (id int, status *Status, text string) *TodoImpl {
-	if status == nil {
-		status = Yet
+func NewTodo (id int, status Status, text string) (Todo, error) {
+	todo := &todoImpl{id: Id(id), status: status, text: ""}
+	if err := todo.SetText(text); err != nil {
+		return nil, err
 	}
-	todo := &TodoImpl{id: id, status: *status, text: ""}
-	todo.SetText(text)
-	return todo
+
+	return todo, nil
 }
 
-func (m *TodoImpl) Status() Status {
+func (m *todoImpl) Status() Status {
 	return m.status;
 }
 
-func (m *TodoImpl) Text() string {
+func (m *todoImpl) Text() string {
 	return m.text;
 }
 
-func (m *TodoImpl) SetStatus(status Status) error {
+func (m *todoImpl) SetStatus(status Status) error {
 	m.status = status;
 	return nil
 }
 
-func (m *TodoImpl) SetText(text string) error {
+func (m *todoImpl) SetText(text string) error {
 	if len(text) < 100 {
 		return fmt.Errorf("todo text is lather then 100, this text is %d", len(text))
 	}

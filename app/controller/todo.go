@@ -1,4 +1,4 @@
-package handler
+package controller
 
 import (
 	"go-gin-init-v2/app/service"

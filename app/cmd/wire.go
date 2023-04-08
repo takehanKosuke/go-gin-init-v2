@@ -3,10 +3,11 @@
 package main
 
 import (
+	"go-gin-init-v2/app/router"
 	"go-gin-init-v2/app/config"
-	"go-gin-init-v2/app/handler"
-	"go-gin-init-v2/app/repository"
+	"go-gin-init-v2/app/controller"
 	"go-gin-init-v2/app/service"
+	"go-gin-init-v2/app/infrastructure/db"
 
 	"github.com/google/wire"
 )
@@ -15,17 +16,17 @@ func InitializeApplication() (APIApplication, error) {
 	wire.Build(
 		NewAPIApplication,
 		config.Load,
-		config.SetupRouter,
+		router.SetupRouter,
 		config.ConnectDB,
 
-		// handler
-		handler.NewTodo,
+		// controller
+		controller.NewTodo,
 
 		// service
 		service.NewTodo,
 
-		// repository
-		repository.NewTodo,
+		// infrastructure
+		infrastructure.NewTodo,
 	)
 	return APIApplication{}, nil
 }
