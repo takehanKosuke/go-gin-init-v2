@@ -1,4 +1,4 @@
-FROM golang:1.16.3
+FROM golang:1.20.2
 
 COPY ./app /go-gin-init-v2/app
 COPY ./go.mod /go-gin-init-v2/
