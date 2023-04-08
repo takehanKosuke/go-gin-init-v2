@@ -1,8 +1,12 @@
 package controller
 
 import (
+	"go-gin-init-v2/app/model"
 	"go-gin-init-v2/app/service"
 	"net/http"
+	"strconv"
+
+	openapi "go-gin-init-v2/out/go/go"
 
 	"github.com/gin-gonic/gin"
 )
@@ -28,33 +32,60 @@ func NewTodo(service service.Todo) Todo {
 	}
 }
 
-// GetAll 初期デフォルトエンドポイント
+// GetAll
 func (d *TodoImpl) GetAll(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": "pong",
+	todos, err := d.service.GetAll()
+	if err != nil {
+		c.AbortWithStatusJSON(500, gin.H{
+			"type":    500,
+			"message": "internal server error",
+		})
+	}
+	c.JSON(http.StatusOK, &openapi.V1GetTodoAll200Response{
+		List: convertOasTodoList(todos),
 	})
 }
-// GetById 初期デフォルトエンドポイント
+
+// GetById
 func (d *TodoImpl) GetById(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": "pong",
-	})
+	id, _ := strconv.Atoi(c.Param("id"))
+	todo, err := d.service.GetById(id)
+	if err != nil {
+		c.AbortWithStatusJSON(500, gin.H{
+			"type":    500,
+			"message": "internal server error",
+		})
+	}
+	c.JSON(http.StatusOK, &openapi.V1GetTodoById200Response{convertOasTodo(*todo)})
 }
-// Post 初期デフォルトエンドポイント
+
+// Post
 func (d *TodoImpl) Post(c *gin.Context) {
-	c.JSON(http.StatusCreated, gin.H{
-		"message": "pong",
-	})
+	c.Status(http.StatusCreated)
 }
-// Update 初期デフォルトエンドポイント
+
+// Update
 func (d *TodoImpl) Update(c *gin.Context) {
-	c.JSON(http.StatusCreated, gin.H{
-		"message": "pong",
-	})
+	c.Status(http.StatusCreated)
 }
-// Delete 初期デフォルトエンドポイント
+
+// Delete
 func (d *TodoImpl) Delete(c *gin.Context) {
-	c.JSON(http.StatusNoContent, gin.H{
-		"message": "pong",
-	})
+	c.Status(http.StatusNoContent)
+}
+
+func convertOasTodo(todo model.Todo) openapi.Todo {
+	return openapi.Todo{
+		Id: int32(todo.Id()),
+		Status: int32(todo.Status()),
+		Text: todo.Text(),
+	}
+}
+
+func convertOasTodoList(todos []*model.Todo) []openapi.Todo {
+	var todoList []openapi.Todo
+	for _, v := range todos {
+		todoList = append(todoList, convertOasTodo(*v))
+	}
+	return todoList
 }

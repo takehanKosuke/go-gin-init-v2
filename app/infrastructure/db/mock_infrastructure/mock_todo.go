@@ -35,23 +35,26 @@ func (m *MockTodo) EXPECT() *MockTodoMockRecorder {
 }
 
 // Delete mocks base method.
-func (m *MockTodo) Delete() {
+func (m *MockTodo) Delete(id int) error {
 	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "Delete")
+	ret := m.ctrl.Call(m, "Delete", id)
+	ret0, _ := ret[0].(error)
+	return ret0
 }
 
 // Delete indicates an expected call of Delete.
-func (mr *MockTodoMockRecorder) Delete() *gomock.Call {
+func (mr *MockTodoMockRecorder) Delete(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockTodo)(nil).Delete))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockTodo)(nil).Delete), id)
 }
 
 // GetAll mocks base method.
-func (m *MockTodo) GetAll() []*model.Todo {
+func (m *MockTodo) GetAll() ([]*model.Todo, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAll")
 	ret0, _ := ret[0].([]*model.Todo)
-	return ret0
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
 }
 
 // GetAll indicates an expected call of GetAll.
@@ -61,11 +64,12 @@ func (mr *MockTodoMockRecorder) GetAll() *gomock.Call {
 }
 
 // GetById mocks base method.
-func (m *MockTodo) GetById(id int) *model.Todo {
+func (m *MockTodo) GetById(id int) (*model.Todo, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetById", id)
 	ret0, _ := ret[0].(*model.Todo)
-	return ret0
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
 }
 
 // GetById indicates an expected call of GetById.
@@ -75,11 +79,12 @@ func (mr *MockTodoMockRecorder) GetById(id interface{}) *gomock.Call {
 }
 
 // Post mocks base method.
-func (m *MockTodo) Post(todo model.Todo) *model.Todo {
+func (m *MockTodo) Post(todo model.Todo) (*model.Todo, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Post", todo)
 	ret0, _ := ret[0].(*model.Todo)
-	return ret0
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
 }
 
 // Post indicates an expected call of Post.
@@ -89,11 +94,12 @@ func (mr *MockTodoMockRecorder) Post(todo interface{}) *gomock.Call {
 }
 
 // Update mocks base method.
-func (m *MockTodo) Update(todo model.Todo) *model.Todo {
+func (m *MockTodo) Update(todo model.Todo) (*model.Todo, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Update", todo)
 	ret0, _ := ret[0].(*model.Todo)
-	return ret0
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
 }
 
 // Update indicates an expected call of Update.

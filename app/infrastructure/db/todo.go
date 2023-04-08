@@ -9,11 +9,11 @@ import (
 
 // Todo Interface
 type Todo interface {
-	GetAll() []*model.Todo
-	GetById(id int) *model.Todo
-	Post(todo model.Todo) *model.Todo
-	Update(todo model.Todo) *model.Todo
-	Delete()
+	GetAll() ([]*model.Todo, error)
+	GetById(id int) (*model.Todo, error)
+	Post(todo model.Todo) (*model.Todo, error)
+	Update(todo model.Todo) (*model.Todo, error)
+	Delete(id int) error
 }
 
 
@@ -26,26 +26,28 @@ func NewTodo(db *gorm.DB) Todo {
 }
 
 // GetAll
-func (d *TodoImpl) GetAll() []*model.Todo{
+func (d *TodoImpl) GetAll() ([]*model.Todo, error) {
 	var todos []*model.Todo
-	return todos
+	return todos, nil
 }
 
 // GetById
-func (d *TodoImpl) GetById(id int) *model.Todo {
+func (d *TodoImpl) GetById(id int) (*model.Todo, error) {
 	var todo *model.Todo
-	return todo
+	return todo, nil
 }
 
 // Post
-func (d *TodoImpl) Post(todo model.Todo) *model.Todo{
-	return &todo
+func (d *TodoImpl) Post(todo model.Todo) (*model.Todo, error) {
+	return &todo, nil
 }
 
 // Update
-func (d *TodoImpl) Update(todo model.Todo) *model.Todo{
-	return &todo
+func (d *TodoImpl) Update(todo model.Todo) (*model.Todo, error) {
+	return &todo, nil
 }
 
 // Delete
-func (d *TodoImpl) Delete() {}
+func (d *TodoImpl) Delete(id int) error {
+	return nil
+}

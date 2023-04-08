@@ -10,27 +10,30 @@ const (
 	Done
 )
 type Todo interface {
+	Id() int
 	Status() Status
 	Text() string
 	SetStatus(status Status) error
 	SetText(text string) error
 }
 
-type Id int
-
 type todoImpl struct {
-	id Id
+	id int
 	status Status
 	text string
 }
 
 func NewTodo (id int, status Status, text string) (Todo, error) {
-	todo := &todoImpl{id: Id(id), status: status, text: ""}
+	todo := &todoImpl{id: id, status: status, text: ""}
 	if err := todo.SetText(text); err != nil {
 		return nil, err
 	}
 
 	return todo, nil
+}
+
+func (m *todoImpl) Id() int {
+	return m.id;
 }
 
 func (m *todoImpl) Status() Status {
