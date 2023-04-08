@@ -117,8 +117,12 @@ paths:
                   type: string
         description: ''
       responses:
-        '201':
-          description: Created
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
@@ -181,7 +185,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
         status:
           type: integer
           enum:
