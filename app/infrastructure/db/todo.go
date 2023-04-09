@@ -11,8 +11,8 @@ import (
 type Todo interface {
 	GetAll() ([]*model.Todo, error)
 	GetById(id int) (*model.Todo, error)
-	Post(todo model.Todo) (*model.Todo, error)
-	Update(todo model.Todo) (*model.Todo, error)
+	Post(todo *model.Todo) (*model.Todo, error)
+	Update(todo *model.Todo) (*model.Todo, error)
 	Delete(id int) error
 }
 
@@ -26,28 +26,34 @@ func NewTodo(db *gorm.DB) Todo {
 }
 
 // GetAll
-func (d *TodoImpl) GetAll() ([]*model.Todo, error) {
+func (i *TodoImpl) GetAll() ([]*model.Todo, error) {
 	var todos []*model.Todo
+	i.db.Limit(20).Find(&todos)
 	return todos, nil
 }
 
 // GetById
-func (d *TodoImpl) GetById(id int) (*model.Todo, error) {
+func (i *TodoImpl) GetById(id int) (*model.Todo, error) {
 	var todo *model.Todo
+	i.db.First(&todo, id)
 	return todo, nil
 }
 
 // Post
-func (d *TodoImpl) Post(todo model.Todo) (*model.Todo, error) {
-	return &todo, nil
+func (i *TodoImpl) Post(todo *model.Todo) (*model.Todo, error) {
+	i.db.Create(todo)
+	return todo, nil
 }
 
 // Update
-func (d *TodoImpl) Update(todo model.Todo) (*model.Todo, error) {
-	return &todo, nil
+func (i *TodoImpl) Update(todo *model.Todo) (*model.Todo, error) {
+	i.db.Updates(todo)
+	return todo, nil
 }
 
 // Delete
-func (d *TodoImpl) Delete(id int) error {
+func (i *TodoImpl) Delete(id int) error {
+	var todo *model.Todo
+	i.db.Delete(todo, id)
 	return nil
 }

@@ -14,17 +14,17 @@
 │   ├── model
 │   ├── util
 │   ├── repository
-│   │   ├─ mongodb
-│   │   │   ├── schemas
-│   │   │   └── mongo.go
-│   │   ├─ mysql
-│   │   │   ├── db.go
-│   │   │   └── migrations
-│   │   ├─ elasticsearch
-│   │   │  └── elasticsearch.go
-│   │   └── redis
-│   │       └── redis.go
 │   └── infrastructure
+│       ├─ mongodb
+│       │   ├── schemas
+│       │   └── mongo.go
+│       ├─ mysql
+│       │   ├── db.go
+│       │   └── migrations
+│       ├─ elasticsearch
+│       │  └── elasticsearch.go
+│       ├── redis
+│       │   └── redis.go
 │       ├── firebase
 │       │   └── firebase_auth.go
 │       └── aws
@@ -74,17 +74,9 @@
 
 - オブジェクト指向プログラミングのオブジェクトを置いておくところ
 
-## Repository
-
-- 外部のデータストア（レコード）を用いる層
-
 ## infrastructure
 
-- firebase
-- s3
-- sqs
-
-などの外部 Iaas を使う層
+などの外部通信の処理を司る層
 
 # このリポジトリで大切にしたいこと
 
