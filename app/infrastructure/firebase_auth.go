@@ -1,9 +1,9 @@
 //go:generate mockgen -source=$GOFILE -destination=mock_$GOPACKAGE/mock_$GOFILE -package=mock_$GOPACKAGE
-package middleware
+package infrastructure
 
 import (
-	"go-gin-init-v2/app/response"
 	"context"
+	"go-gin-init-v2/app/response"
 
 	"firebase.google.com/go/auth"
 	"github.com/gin-gonic/gin"

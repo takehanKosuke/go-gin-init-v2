@@ -1,8 +1,8 @@
-package middleware
+package repository
 
 import (
-	"go-gin-init-v2/app/middleware/mock_middleware"
 	"fmt"
+	"go-gin-init-v2/app/middleware/mock_middleware"
 	"net/http"
 	"net/http/httptest"
 	"testing"

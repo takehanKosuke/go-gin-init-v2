@@ -23,8 +23,8 @@ type todoImpl struct {
 	text string
 }
 
-func NewTodo (id int, status Status, text string) (Todo, error) {
-	todo := &todoImpl{id: id, status: status, text: ""}
+func NewTodo (status Status, text string) (Todo, error) {
+	todo := &todoImpl{status: status, text: ""}
 	if err := todo.SetText(text); err != nil {
 		return nil, err
 	}

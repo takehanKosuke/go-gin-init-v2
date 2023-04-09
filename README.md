@@ -30,7 +30,6 @@ gin + gorm + mysql のディレクトリをざっくり作るよ
 │   │   ├── conf.d
 │   │   └── log
 │   └── swagger
-├── proto
 ├── scripts
 └── terraform
 ```
@@ -71,9 +70,9 @@ make local
 
 基本的な Tips は全て`Makefile`に記述してあるためそちらを参照すること
 
-## swaggerの変更について
+## swagger の変更について
 
-swaggerは `stoplight studio`を用いて記述していくことを前提としているためあえて1ファイルに全てのデータの記述を行なっている
+swagger は `stoplight studio`を用いて記述していくことを前提としているためあえて 1 ファイルに全てのデータの記述を行なっている
 
 ```
 brew install --cask stoplight-studio
@@ -95,12 +94,6 @@ brew install --cask stoplight-studio
      の 3 つを作成する
 
 ## エラー解決
-
-`make proto` とした時に
-
-```
-Please specify a program using absolute path or make sure the program is available in your PATH system variable」と言うエラーが出る場合
-```
 
 と言うようなエラーが吐かれた時は
 

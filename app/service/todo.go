@@ -1,8 +1,8 @@
 package service
 
 import (
-	infrastructure "go-gin-init-v2/app/infrastructure/db"
 	"go-gin-init-v2/app/model"
+	"go-gin-init-v2/app/repository"
 )
 
 type Todo interface {
@@ -14,16 +14,16 @@ type Todo interface {
 }
 
 type TodoImpl struct {
-	infrastructure infrastructure.Todo
+	repository repository.Todo
 }
 
-func NewTodo(infrastructure infrastructure.Todo) Todo {
-	return &TodoImpl{infrastructure: infrastructure}
+func NewTodo(repository repository.Todo) Todo {
+	return &TodoImpl{repository: repository}
 }
 
 // GetAll
 func (d *TodoImpl) GetAll() ([]*model.Todo, error) {
-	todos, err := d.infrastructure.GetAll()
+	todos, err := d.repository.GetAll()
 	if err != nil {
 		return nil, err
 	}
@@ -32,7 +32,7 @@ func (d *TodoImpl) GetAll() ([]*model.Todo, error) {
 
 // GetById
 func (d *TodoImpl) GetById(id int) (*model.Todo, error) {
-	todo, err := d.infrastructure.GetById(id)
+	todo, err := d.repository.GetById(id)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ func (d *TodoImpl) GetById(id int) (*model.Todo, error) {
 
 // Post
 func (d *TodoImpl) Post(todo *model.Todo) (*model.Todo, error) {
-	newTodo, err := d.infrastructure.Post(todo)
+	newTodo, err := d.repository.Post(todo)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ func (d *TodoImpl) Post(todo *model.Todo) (*model.Todo, error) {
 
 // Update
 func (d *TodoImpl) Update(todo *model.Todo) (*model.Todo, error) {
-	updateTodo, err := d.infrastructure.Update(todo)
+	updateTodo, err := d.repository.Update(todo)
 	if err != nil {
 		return nil, err
 	}
