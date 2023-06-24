@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: ここにはアプリの説明文が入ります
 servers:
-  - url: 'http://localhost:8080/'
+  - url: "http://localhost:8080/"
     description: ローカルサーバ
 paths:
   /todos:
@@ -13,18 +13,18 @@ paths:
       description: ここはAPIの詳細を書きます
       operationId: V1GetTodoAll
       responses:
-        '200':
+        "200":
           description: ok
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Todo'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
+                  $ref: "#/components/schemas/Todo"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
       tags:
         - todo
     post:
@@ -47,22 +47,22 @@ paths:
                     - done
               required:
                 - text
-        description: ''
+        description: ""
       responses:
-        '200':
+        "200":
           description: 特定のtodoを返します
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Todo'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/Todo"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
       tags:
         - todo
     parameters: []
-  '/todos/{id}':
+  "/todos/{id}":
     get:
       summary: idで特定のtodoを返します
       description: ここはAPIの詳細を書きます
@@ -75,19 +75,19 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  '':
-                    $ref: '#/components/schemas/Todo'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
+                  "":
+                    $ref: "#/components/schemas/Todo"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
       tags:
         - todo
     put:
@@ -115,18 +115,18 @@ paths:
                     - done
                 text:
                   type: string
-        description: ''
+        description: ""
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Todo'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/Todo"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
       tags:
         - todo
     delete:
@@ -141,12 +141,12 @@ paths:
           schema:
             type: string
       responses:
-        '204':
+        "204":
           description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
       tags:
         - todo
     parameters:
@@ -162,13 +162,13 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
     InternalServerError:
       description: Internal server error
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
   schemas:
     Error:
       type: object
@@ -197,3 +197,8 @@ components:
       required:
         - id
         - status
+  securitySchemes:
+    x-authorization:
+      name: jwt
+      type: apiKey
+      in: header

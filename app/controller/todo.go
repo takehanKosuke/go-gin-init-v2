@@ -61,6 +61,7 @@ func (d *TodoImpl) GetById(c *gin.Context) {
 
 // Post
 func (d *TodoImpl) Post(c *gin.Context) {
+
 	c.Status(http.StatusCreated)
 }
 
