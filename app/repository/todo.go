@@ -16,7 +16,6 @@ type Todo interface {
 	Delete(id int) error
 }
 
-
 type TodoImpl struct {
 	db *gorm.DB
 }
