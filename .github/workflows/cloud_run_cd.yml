@@ -24,7 +24,6 @@ env:
   SLACK_CHANNEL: チャンネル名
   SLACK_USERNAME: Deploy Bot
 
-
 jobs:
   deploy:
     needs: [build, format, test]
@@ -65,7 +64,6 @@ jobs:
             --region asia-northeast1 \
             --platform managed \
             --quiet
-
 
       # 適切に処理が終了したときにslackに成功メッセージを飛ばす
       - name: Slack Notification on Success

@@ -1,0 +1,35 @@
+name: Weekly issue metrics
+
+on:
+  schedule:
+    - cron: "0 15 * * 4"
+  workflow_dispatch:
+
+jobs:
+  create-issue-metrics:
+    runs-on:
+      - self-hosted
+      - myshoes
+      - Linux
+      - myshoes_tky02_lxd_large
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v4.1.1
+      - name: ENV settings
+        run: |
+          echo "CURRENT_DATE=$(date +%Y-%m-%d)" >> $GITHUB_ENV
+          echo "ONE_WEEK_AGO=$(date -d '7 days ago' +%Y-%m-%d)" >> $GITHUB_ENV
+      - name: Run issue-metrics tool
+        uses: github/issue-metrics@v2.14.3
+        env:
+          SEARCH_QUERY: "repo:MatchingAgent/sincere-app is:pr closed:${{ env.ONE_WEEK_AGO }}..${{ env.CURRENT_DATE }} -label:renovate"
+      - name: Create issue
+        run: gh issue create
+          --title "Weekly issue metrics (${{ env.ONE_WEEK_AGO }} ~ ${{ env.CURRENT_DATE }})"
+          --body-file ./issue_metrics.md
+          --label "metrics"
